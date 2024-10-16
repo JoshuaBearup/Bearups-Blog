@@ -1,0 +1,323 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Typography and Background */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #ff6347;
+    color: #fff;
+}
+
+/* Navigation */
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ff6347;
+}
+
+/* Common Headers */
+h1, h2 {
+    margin: 20px 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+/* Paragraph Styling */
+p {
+    text-align: center;
+    padding: 10px;
+    margin: 10px auto;
+    max-width: 800px;
+    font-size: 1.1em;
+}
+
+/* Introduction Section */
+.introduction {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+/* Projects Container */
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.project-card {
+    background-color: #ff6347;
+    border: 3px solid #ff6347;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.project-card h3 {
+    margin: 15px 0 10px;
+    padding: 0 10px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.project-card p {
+    padding: 0 10px 15px;
+    font-size: 0.9em;
+    color: #fff;
+}
+
+/* Timeline for Professional Experience (About Me) */
+.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+    position: relative;
+}
+
+.timeline li {
+    margin-bottom: 30px;
+    padding-left: 20px;
+    border-left: 3px solid #ff6347;
+    position: relative;
+}
+
+.timeline li h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.timeline li p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+.timeline li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    background-color: #ff6347;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* Experience List */
+ul.experience-list li {
+    display: block; 
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.social-icons a:hover {
+    color: #ff6347;
+}
+
+/* Contact Page Specific Styles */
+.contact-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.contact-intro, .contact-methods, .availability {
+    margin-bottom: 40px;
+}
+
+.contact-content h3 {
+    color: #ff6347;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.contact-info {
+    list-style-type: none;
+    padding: 0;
+    display: flex; /* Display items horizontally */
+    justify-content: space-around;
+    flex-wrap: wrap; /* Wrap on smaller screens */
+}
+
+.contact-info li {
+    background-color: #f4f4f4;
+    padding: 15px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    width: 45%; /* Set widget width */
+    max-width: 400px;
+    text-align: left;
+    font-size: 1.1em;
+}
+
+.contact-info li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.contact-info li i {
+    margin-right: 10px;
+    font-size: 1.5em;
+    color: #ff6347; /* Icon color */
+}
+
+.contact-info a {
+    color: #333; /* Default link color (black) */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #ff6347; /* Hover effect: orange */
+}
+
+/* Blog Template Styles */
+main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section h2 {
+    font-size: 1.8em;
+    color: #ff6347;
+}
+
+/* Blog Images */
+
+.blog{
+    display: block;
+    text-align: center;
+}
+
+.bridgelab {
+    width: 60%;
+    height: auto; 
+    max-width: 1200px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .projects-container, .contact-info {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablet */
+    }
+    .contact-info li {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-container, .contact-info {
+        grid-template-columns: 1fr; /* 1 column for mobile */
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-content {
+        padding: 20px 10px;
+    }
+    
+    .contact-content h2 {
+        font-size: 2em;
+    }
+    
+    .contact-content h3 {
+        font-size: 1.5em;
+    }
+}

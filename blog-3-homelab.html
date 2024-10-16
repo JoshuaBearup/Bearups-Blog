@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact Me</a></li>
+        </ul>
+    </nav>
+        <h1>Home Lab</h1>
+    </header>
+    <main class="blog">
+        <section>
+            <h2>My Home Lab Environment</h2>
+            <p>Due to the lack of entry level roles within the Cybersecurity industry, I knew that one of the biggest hurdles I would face when trying to break into the industry would be gaining real-world/practical/hands-on experiance. As a person who learns best through personal experiance, I decided that the most effective way for me to start applying my knowledge to real-world experiances would be to build a home lab environment.</p>
+            <p>So I hopped onto facebook marketplace and purchased a second hand Dell R730 server. If that wasn't already overkill enough, the guy threw in a 48 port Cisco Catylst Switch that he no longer needed.</p>
+        </section>
+        <section>
+            <h2>Configuring Dell Server
+            </h2>
+            <p>When I first set up my homelab, I faced a few challenges, but each issue helped me learn something new. My setup started with a network adapter (a Pineapple) connected to my laptop, which was acting as a bridge to my Dell server. I know it sounds ridiculous but this is the early stages of my home lab so don't judge. I didn't even have a server rack yet! </p>
+                <img src="images/bridgelab.jpg" alt="home lab image" class="bridgelab">
+            <p>The reason for this workaround was that my router was too far away from the server. I quickly discovered that servers are not designed to rely on WiFi connections, and their processing capabilities will be severly reduced when used in this way. Well we were getting recabling done in a months time, which meant I would be able to connect a router to an ethernet port in my room. Despite this, I was eager to get things running, so I went down to Bunnings and purchased a 15 Meter Cat6 Ethernet cable which I ran all the way through the house from the main router to my room.</p>
+            <p>Not ideal for the rest of my family, but it was a great temporary solution.</p>
+        </section>
+        <section>
+            <h2></h2>
+            <p></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Bearup's Blog. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/joshua-bearup-0820742a9/" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/JoshuaBearup" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+            <a href="https://linktr.ee/joshuabearup" target="_blank" aria-label="Linktree Profile"><i class="fas fa-tree"></i></a>
+        </div>
+    </footer>
+</body>
+
+</html>

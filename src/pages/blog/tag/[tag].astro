@@ -1,0 +1,277 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+import ReadingTime from '../../../components/ReadingTime.astro';
+import TagsList from '../../../components/TagsList.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
+	
+	return allTags.map(tag => ({
+		params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
+		props: { tag },
+	}));
+}
+
+const { tag } = Astro.props;
+
+// Get posts with this tag
+const allPosts = await getCollection('blog');
+const posts = allPosts
+	.filter(post => post.data.tags?.includes(tag))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Calculate reading time
+function calculateReadingTime(text: string): number {
+	const wordsPerMinute = 200;
+	const words = text.trim().split(/\s+/).length;
+	return Math.ceil(words / wordsPerMinute);
+}
+
+const postsWithMeta = posts.map(post => ({
+	...post,
+	readingTime: post.data.readingTime || calculateReadingTime(post.body || '')
+}));
+
+// Get all tags for display
+const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`#${tag} - Blog - ${SITE_TITLE}`} description={`Posts tagged with #${tag} on ${SITE_TITLE}`} />
+		<style>
+			main {
+				width: 960px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 3em 1em;
+			}
+
+			.tag-header {
+				text-align: center;
+				margin-bottom: var(--space-8);
+			}
+
+			.tag-header h1 {
+				margin-bottom: var(--space-4);
+			}
+
+			.tag-badge {
+				display: inline-flex;
+				align-items: center;
+				padding: var(--space-2) var(--space-4);
+				background: var(--accent);
+				color: white;
+				font-size: var(--text-2xl);
+				font-weight: 700;
+				border-radius: var(--radius-lg);
+			}
+
+			.tag-header p {
+				color: var(--text-secondary);
+			}
+
+			.results-count {
+				font-size: var(--text-sm);
+				color: var(--text-tertiary);
+				margin-bottom: var(--space-6);
+			}
+
+			.all-tags {
+				margin-bottom: var(--space-8);
+				padding: var(--space-4);
+				background: var(--bg-secondary);
+				border-radius: var(--radius-lg);
+			}
+
+			.all-tags h2 {
+				font-size: var(--text-sm);
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				color: var(--text-tertiary);
+				margin-bottom: var(--space-3);
+			}
+
+			.posts-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 2rem;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			.post-item {
+				width: calc(50% - 1rem);
+			}
+
+			.post-link {
+				display: block;
+				text-decoration: none;
+				transition: transform var(--transition-fast);
+			}
+
+			.post-link:hover {
+				transform: translateY(-4px);
+			}
+
+			.post-link:hover .post-title {
+				color: var(--accent);
+			}
+
+			.post-image-wrapper {
+				margin-bottom: var(--space-4);
+				border-radius: var(--radius-lg);
+				overflow: hidden;
+			}
+
+			.post-image-wrapper img {
+				display: block;
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+				transition: transform var(--transition-fast);
+			}
+
+			.post-link:hover .post-image-wrapper img {
+				transform: scale(1.02);
+			}
+
+			.post-meta {
+				display: flex;
+				align-items: center;
+				gap: var(--space-2);
+				margin-bottom: var(--space-2);
+				font-size: var(--text-sm);
+				color: var(--text-tertiary);
+			}
+
+			.post-meta-separator {
+				color: var(--border-default);
+			}
+
+			.post-title {
+				margin: 0;
+				color: var(--text-primary);
+				line-height: 1.3;
+				font-size: var(--text-xl);
+				transition: color var(--transition-fast);
+			}
+
+			.post-description {
+				margin: var(--space-2) 0 0;
+				color: var(--text-secondary);
+				font-size: var(--text-base);
+				line-height: 1.5;
+			}
+
+			.empty-state {
+				text-align: center;
+				padding: var(--space-12) var(--space-4);
+				color: var(--text-tertiary);
+			}
+
+			.back-link {
+				display: inline-flex;
+				align-items: center;
+				gap: var(--space-2);
+				margin-top: var(--space-4);
+				color: var(--accent);
+				text-decoration: none;
+				font-weight: 500;
+			}
+
+			.back-link:hover {
+				text-decoration: underline;
+			}
+
+			@media (max-width: 720px) {
+				main {
+					padding: 1em;
+				}
+
+				.posts-list {
+					gap: 0.5em;
+				}
+
+				.post-item {
+					width: 100%;
+					text-align: center;
+				}
+
+				.post-image-wrapper img {
+					height: 180px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="tag-header">
+				<h1><span class="tag-badge">#{tag}</span></h1>
+				<p>All posts tagged with #{tag}</p>
+			</div>
+
+			{allTags.length > 0 && (
+				<div class="all-tags">
+					<h2>All Tags</h2>
+					<TagsList tags={allTags.filter(t => t !== tag)} />
+				</div>
+			)}
+
+			{postsWithMeta.length > 0 ? (
+				<>
+					<p class="results-count">{postsWithMeta.length} {postsWithMeta.length === 1 ? 'post' : 'posts'}</p>
+					<ul class="posts-list">
+						{postsWithMeta.map((post) => (
+							<li class="post-item">
+								<a href={`/blog/${post.id}/`} class="post-link">
+									{post.data.heroImage && (
+										<div class="post-image-wrapper">
+											<Image 
+												width={720} 
+												height={360} 
+												src={post.data.heroImage} 
+												alt="" 
+											/>
+										</div>
+									)}
+									<div class="post-meta">
+										<FormattedDate date={post.data.pubDate} />
+										<span class="post-meta-separator">•</span>
+										<ReadingTime minutes={post.readingTime} />
+									</div>
+									<h3 class="post-title">{post.data.title}</h3>
+									{post.data.description && (
+										<p class="post-description">{post.data.description}</p>
+									)}
+								</a>
+							</li>
+						))}
+					</ul>
+				</>
+			) : (
+				<div class="empty-state">
+					<p>No posts found with this tag yet.</p>
+					<a href="/blog" class="back-link">
+						<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+							<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M12 19l-7-7 7-7"/>
+						</svg>
+						Back to all posts
+					</a>
+				</div>
+			)}
+		</main>
+		<Footer />
+	</body>
+</html>

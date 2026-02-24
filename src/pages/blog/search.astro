@@ -1,0 +1,105 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import Search from '../../components/Search.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Search - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 3em 1em;
+			}
+
+			.search-header {
+				text-align: center;
+				margin-bottom: var(--space-8);
+			}
+
+			.search-header h1 {
+				font-size: var(--text-4xl);
+				margin-bottom: var(--space-4);
+				color: var(--text-primary);
+			}
+
+			.search-header p {
+				color: var(--text-secondary);
+				font-size: var(--text-lg);
+			}
+
+			.search-wrapper {
+				min-height: 400px;
+			}
+
+			/* Keyboard shortcuts hint */
+			.search-hints {
+				display: flex;
+				justify-content: center;
+				gap: var(--space-6);
+				margin-top: var(--space-8);
+				padding-top: var(--space-6);
+				border-top: 1px solid var(--border-subtle);
+			}
+
+			.search-hint {
+				display: flex;
+				align-items: center;
+				gap: var(--space-2);
+				font-size: var(--text-sm);
+				color: var(--text-tertiary);
+			}
+
+			.search-hint kbd {
+				background-color: var(--bg-tertiary);
+				border: 1px solid var(--border-default);
+				border-radius: var(--radius-sm);
+				padding: var(--space-1) var(--space-2);
+				font-family: inherit;
+				font-size: var(--text-xs);
+			}
+
+			@media (max-width: 720px) {
+				.search-header h1 {
+					font-size: var(--text-3xl);
+				}
+
+				.search-hints {
+					flex-direction: column;
+					gap: var(--space-3);
+					align-items: center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="search-header">
+				<h1>Search</h1>
+				<p>Search through all blog posts by keyword, topic, or content.</p>
+			</div>
+			<div class="search-wrapper">
+				<Search showSubResults={true} excerptLength={20} />
+			</div>
+			<div class="search-hints">
+				<span class="search-hint">
+					<kbd>↑</kbd> <kbd>↓</kbd> Navigate results
+				</span>
+				<span class="search-hint">
+					<kbd>Enter</kbd> Open result
+				</span>
+				<span class="search-hint">
+					<kbd>Esc</kbd> Clear search
+				</span>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -5,10 +5,18 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import ReadingTime from '../components/ReadingTime.astro';
+import CategoryBadge from '../components/CategoryBadge.astro';
+import TagsList from '../components/TagsList.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, category, tags, readingTime } = Astro.props;
+
+// Calculate reading time from content if not provided
+// This is a fallback - actual calculation should be done in the page
+const estimatedReadingTime = readingTime || 5;
 ---
 
 <html lang="en">
@@ -20,37 +28,84 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				max-width: 100%;
 				margin: 0;
 			}
+
 			.hero-image {
 				width: 100%;
 			}
+
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
+				border-radius: var(--radius-xl);
+				box-shadow: var(--shadow-lg);
 			}
+
 			.prose {
 				width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 1em;
-				color: rgb(var(--gray-dark));
 			}
+
 			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
+				margin-bottom: var(--space-8);
+				padding: var(--space-6) 0;
 				text-align: center;
-				line-height: 1;
+				line-height: 1.2;
 			}
+
 			.title h1 {
-				margin: 0 0 0.5em 0;
+				margin: 0 0 var(--space-4) 0;
+				font-size: var(--text-4xl);
+				line-height: 1.1;
 			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+
+			.meta {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: var(--space-3);
+				color: var(--text-tertiary);
 			}
+
+			.meta-row {
+				display: flex;
+				align-items: center;
+				gap: var(--space-4);
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+
+			.meta-separator {
+				color: var(--border-default);
+			}
+
 			.last-updated-on {
 				font-style: italic;
+				font-size: var(--text-sm);
+				color: var(--text-muted);
+			}
+
+			.category-tags {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: var(--space-3);
+				margin-top: var(--space-4);
+			}
+
+			@media (max-width: 720px) {
+				.title h1 {
+					font-size: var(--text-3xl);
+				}
+
+				.meta-row {
+					gap: var(--space-2);
+				}
+
+				.meta-separator {
+					display: none;
+				}
 			}
 		</style>
 	</head>
@@ -64,20 +119,32 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				</div>
 				<div class="prose">
 					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
 						<h1>{title}</h1>
+						<div class="meta">
+							<div class="meta-row">
+								<FormattedDate date={pubDate} />
+								<span class="meta-separator">•</span>
+								<ReadingTime minutes={estimatedReadingTime} />
+								{updatedDate && (
+									<>
+										<span class="meta-separator">•</span>
+										<span class="last-updated-on">
+											Updated <FormattedDate date={updatedDate} />
+										</span>
+									</>
+								)}
+							</div>
+							{(category || tags?.length > 0) && (
+								<div class="category-tags">
+									{category && <CategoryBadge category={category} />}
+									{tags && tags.length > 0 && <TagsList tags={tags} />}
+								</div>
+							)}
+						</div>
 						<hr />
 					</div>
 					<slot />
+					<ShareButtons title={title} description={description} />
 				</div>
 			</article>
 		</main>

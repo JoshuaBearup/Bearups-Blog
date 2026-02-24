@@ -9,12 +9,32 @@ export async function getStaticPaths() {
 		props: post,
 	}));
 }
+
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
+
+// Calculate reading time from the rendered content
+// remarkPluginFrontmatter may contain readingTime if a plugin is configured
+// Otherwise, estimate based on word count (average 200 words per minute)
+function calculateReadingTime(text: string): number {
+	const wordsPerMinute = 200;
+	const words = text.trim().split(/\s+/).length;
+	return Math.ceil(words / wordsPerMinute);
+}
+
+// Get reading time from plugin or calculate from body
+const readingTime = remarkPluginFrontmatter?.readingTime || 
+	(post.body ? calculateReadingTime(post.body) : 5);
+
+// Merge reading time into post data
+const postData = {
+	...post.data,
+	readingTime,
+};
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...postData}>
 	<Content />
 </BlogPost>

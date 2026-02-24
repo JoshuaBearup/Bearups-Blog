@@ -16,7 +16,9 @@
     "@astrojs/mdx": "^5.0.0-beta.8",
     "@astrojs/rss": "^4.0.15-beta.3",
     "@astrojs/sitemap": "^3.6.1-beta.3",
+    "@pagefind/default-ui": "^1.4.0",
     "astro": "^6.0.0-beta.14",
+    "pagefind": "^1.4.0",
     "sharp": "^0.34.3"
   }
 }

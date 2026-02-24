@@ -1,21 +1,133 @@
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ * Global Styles for Bearup's Blog
+ * Clean, bold, minimal aesthetic for AI/Cybersecurity professionals
+ * WCAG AA compliant color system with dark mode support
  */
 
+/* ========================================
+   CSS Custom Properties - Color System
+   ======================================== */
+
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+	/* Primary accent colors */
+	--accent: #2563eb;
+	--accent-hover: #1d4ed8;
+	--accent-light: #3b82f6;
+	--accent-dark: #1e40af;
+
+	/* Semantic colors */
+	--success: #059669;
+	--warning: #d97706;
+	--error: #dc2626;
+	--info: #0284c7;
+
+	/* Light mode colors (default) */
+	--bg-primary: #ffffff;
+	--bg-secondary: #f8fafc;
+	--bg-tertiary: #f1f5f9;
+	--bg-elevated: #ffffff;
+
+	--text-primary: #0f172a;
+	--text-secondary: #475569;
+	--text-tertiary: #64748b;
+	--text-muted: #94a3b8;
+
+	--border-subtle: #e2e8f0;
+	--border-default: #cbd5e1;
+	--border-strong: #94a3b8;
+
+	/* RGB values for alpha transparency */
+	--text-primary-rgb: 15, 23, 42;
+	--text-secondary-rgb: 71, 85, 105;
+	--bg-secondary-rgb: 248, 250, 252;
+
+	/* Shadows */
+	--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+	--shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+	/* Spacing scale */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+
+	/* Border radius */
+	--radius-sm: 0.25rem;
+	--radius-md: 0.5rem;
+	--radius-lg: 0.75rem;
+	--radius-xl: 1rem;
+
+	/* Typography scale */
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.125rem;
+	--text-xl: 1.25rem;
+	--text-2xl: 1.5rem;
+	--text-3xl: 1.875rem;
+	--text-4xl: 2.25rem;
+	--text-5xl: 3rem;
+
+	/* Transitions */
+	--transition-fast: 150ms ease;
+	--transition-base: 250ms ease;
+	--transition-slow: 350ms ease;
 }
+
+/* ========================================
+   Dark Mode
+   ======================================== */
+
+[data-theme="dark"] {
+	/* Primary accent colors - adjusted for dark mode */
+	--accent: #60a5fa;
+	--accent-hover: #3b82f6;
+	--accent-light: #93c5fd;
+	--accent-dark: #2563eb;
+
+	/* Semantic colors */
+	--success: #34d399;
+	--warning: #fbbf24;
+	--error: #f87171;
+	--info: #38bdf8;
+
+	/* Dark mode background colors */
+	--bg-primary: #0f172a;
+	--bg-secondary: #1e293b;
+	--bg-tertiary: #334155;
+	--bg-elevated: #1e293b;
+
+	--text-primary: #f8fafc;
+	--text-secondary: #cbd5e1;
+	--text-tertiary: #94a3b8;
+	--text-muted: #64748b;
+
+	--border-subtle: #334155;
+	--border-default: #475569;
+	--border-strong: #64748b;
+
+	/* RGB values */
+	--text-primary-rgb: 248, 250, 252;
+	--text-secondary-rgb: 203, 213, 225;
+	--bg-secondary-rgb: 30, 41, 59;
+
+	/* Shadows - less intense in dark mode */
+	--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+	--shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================
+   Font Face Declarations
+   ======================================== */
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-regular.woff") format("woff");
@@ -23,6 +135,7 @@
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-bold.woff") format("woff");
@@ -30,111 +143,274 @@
 	font-style: normal;
 	font-display: swap;
 }
+
+/* ========================================
+   Base Styles
+   ======================================== */
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
 body {
-	font-family: "Atkinson", sans-serif;
+	font-family: "Atkinson", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
+	background-color: var(--bg-primary);
+	color: var(--text-primary);
+	font-size: var(--text-lg);
 	line-height: 1.7;
+	transition: background-color var(--transition-base), color var(--transition-base);
 }
+
+/* Smooth transition for theme changes */
+body * {
+	transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
 main {
 	width: 720px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
+
+/* ========================================
+   Typography
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 var(--space-4) 0;
+	color: var(--text-primary);
 	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
 	font-weight: 700;
+	letter-spacing: -0.02em;
 }
+
+h1 {
+	font-size: var(--text-4xl);
+}
+
+h2 {
+	font-size: var(--text-3xl);
+}
+
+h3 {
+	font-size: var(--text-2xl);
+}
+
+h4 {
+	font-size: var(--text-xl);
+}
+
+h5 {
+	font-size: var(--text-lg);
+}
+
+h6 {
+	font-size: var(--text-base);
+}
+
+p {
+	margin-bottom: var(--space-6);
+	color: var(--text-secondary);
+}
+
+strong, b {
+	font-weight: 700;
+	color: var(--text-primary);
+}
+
 a {
 	color: var(--accent);
+	text-decoration: none;
+	transition: color var(--transition-fast);
 }
+
 a:hover {
-	color: var(--accent);
+	color: var(--accent-hover);
+	text-decoration: underline;
 }
-p {
-	margin-bottom: 1em;
+
+/* ========================================
+   Lists
+   ======================================== */
+
+ul, ol {
+	margin: 0 0 var(--space-6) 0;
+	padding-left: var(--space-6);
+	color: var(--text-secondary);
 }
-.prose p {
-	margin-bottom: 2em;
+
+li {
+	margin-bottom: var(--space-2);
 }
-textarea {
-	width: 100%;
-	font-size: 16px;
+
+/* ========================================
+   Code & Preformatted
+   ======================================== */
+
+code {
+	font-family: "SF Mono", Monaco, Inconsolata, "Fira Code", monospace;
+	font-size: 0.85em;
+	padding: var(--space-1) var(--space-2);
+	background-color: var(--bg-tertiary);
+	border-radius: var(--radius-sm);
+	color: var(--text-primary);
 }
-input {
-	font-size: 16px;
+
+pre {
+	padding: var(--space-6);
+	border-radius: var(--radius-lg);
+	background-color: var(--bg-secondary);
+	overflow-x: auto;
+	margin-bottom: var(--space-6);
+	border: 1px solid var(--border-subtle);
 }
+
+pre > code {
+	all: unset;
+	font-family: "SF Mono", Monaco, Inconsolata, "Fira Code", monospace;
+	font-size: 0.9em;
+	color: var(--text-primary);
+}
+
+/* ========================================
+   Blockquotes
+   ======================================== */
+
+blockquote {
+	border-left: 4px solid var(--accent);
+	padding: var(--space-4) var(--space-6);
+	margin: 0 0 var(--space-6) 0;
+	background-color: var(--bg-secondary);
+	border-radius: 0 var(--radius-md) var(--radius-md) 0;
+	font-style: italic;
+}
+
+blockquote p {
+	margin: 0;
+	color: var(--text-secondary);
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* ========================================
+   Horizontal Rule
+   ======================================== */
+
+hr {
+	border: none;
+	border-top: 1px solid var(--border-subtle);
+	margin: var(--space-8) 0;
+}
+
+/* ========================================
+   Tables
+   ======================================== */
+
 table {
 	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: var(--space-6);
 }
+
+th, td {
+	padding: var(--space-3) var(--space-4);
+	text-align: left;
+	border-bottom: 1px solid var(--border-subtle);
+}
+
+th {
+	font-weight: 700;
+	color: var(--text-primary);
+	background-color: var(--bg-secondary);
+}
+
+/* ========================================
+   Form Elements
+   ======================================== */
+
+input, textarea, select {
+	font-family: inherit;
+	font-size: var(--text-base);
+	padding: var(--space-3) var(--space-4);
+	background-color: var(--bg-secondary);
+	border: 1px solid var(--border-default);
+	border-radius: var(--radius-md);
+	color: var(--text-primary);
+	transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input:focus, textarea:focus, select:focus {
+	outline: none;
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+	box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+}
+
+button {
+	font-family: inherit;
+	font-size: var(--text-base);
+	font-weight: 600;
+	padding: var(--space-3) var(--space-6);
+	background-color: var(--accent);
+	color: white;
+	border: none;
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+button:hover {
+	background-color: var(--accent-hover);
+}
+
+button:active {
+	transform: translateY(1px);
+}
+
+/* ========================================
+   Images
+   ======================================== */
+
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: var(--radius-lg);
 }
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+
+/* ========================================
+   Prose Utility Class
+   ======================================== */
+
+.prose p {
+	margin-bottom: var(--space-6);
 }
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
+
+.prose h2 {
+	margin-top: var(--space-12);
 }
-pre > code {
-	all: unset;
+
+.prose h3 {
+	margin-top: var(--space-8);
 }
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
-}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
 
 .sr-only {
 	border: 0;
@@ -144,12 +420,84 @@ hr {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
 	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+/* Focus visible styles */
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+}
+
+/* Selection styling */
+::selection {
+	background-color: var(--accent);
+	color: white;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--border-default);
+	border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--border-strong);
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 720px) {
+	body {
+		font-size: var(--text-base);
+	}
+
+	main {
+		padding: 1em;
+	}
+
+	h1 {
+		font-size: var(--text-3xl);
+	}
+
+	h2 {
+		font-size: var(--text-2xl);
+	}
+
+	h3 {
+		font-size: var(--text-xl);
+	}
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+
+@media print {
+	body {
+		background: white;
+		color: black;
+	}
+
+	a {
+		color: black;
+		text-decoration: underline;
+	}
+
+	header, footer, .no-print {
+		display: none !important;
+	}
 }

@@ -1,76 +1,75 @@
-# Astro Starter Kit: Blog
+# Bearup's Blog
 
-```sh
-npm create astro@latest -- --template blog
+Personal blog exploring AI, Cybersecurity, Data, Privacy, and Emerging Technologies.
+Built with Astro and deployed to GitHub Pages.
+
+**Live site:** https://joshuabearup.github.io/Bearups-Blog/
+
+## Features
+
+- Clean, minimal design with dark mode toggle
+- Pagefind search functionality
+- Categories: AI, Cybersecurity, Data, Privacy, Emerging Tech
+- Tags for granular organization
+- Social sharing buttons (X, LinkedIn)
+- RSS feed
+- 5-minute reading time estimates
+- WCAG AA accessible
+
+## Tech Stack
+
+- [Astro](https://astro.build) - Static site generator
+- [Pagefind](https://pagefind.app) - Static search
+- GitHub Actions - CI/CD deployment
+- GitHub Pages - Hosting
+
+## Project Structure
+
 ```
-
-<!-- ASTRO:REMOVE:START -->
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
-
-<!-- ASTRO:REMOVE:END -->
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-<!-- ASTRO:REMOVE:START -->
-
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
-
-<!-- ASTRO:REMOVE:END -->
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
+├── public/              # Static assets
 ├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
+│   ├── assets/          # Images
+│   ├── components/      # Astro components
+│   ├── content/
+│   │   └── blog/        # Blog posts (.md files)
+│   ├── layouts/         # Page layouts
+│   └── pages/           # Route pages
 ├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+└── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command           | Action                                      |
+|:----------------  |:------------------------------------------- |
+| `npm install`     | Install dependencies                        |
+| `npm run dev`     | Start dev server at `localhost:4321`        |
+| `npm run build`   | Build production site to `./dist/`          |
+| `npm run preview` | Preview build locally                       |
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+## Adding Posts
 
-Any static assets, like images, can be placed in the `public/` directory.
+Create a new `.md` file in `src/content/blog/`:
 
-## 🧞 Commands
+```yaml
+---
+title: 'Post Title'
+description: 'Brief description'
+pubDate: 'Feb 24 2025'
+heroImage: '../../assets/blog-placeholder-1.jpg'
+category: 'AI'
+tags: ['Tag1', 'Tag2']
+---
 
-All commands are run from the root of the project, from a terminal:
+Post content here...
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Categories: AI, Cybersecurity, Data, Privacy, Emerging Tech
 
-## 👀 Want to learn more?
+## Deployment
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Pushes to `main` branch trigger GitHub Actions workflow that builds and deploys to GitHub Pages.
 
-## Credit
+---
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Built with help from an OpenClaw AI agent running Kimi K2.5.

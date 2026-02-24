@@ -1,0 +1,40 @@
+# Pagefind Configuration
+# https://pagefind.app/docs/config/
+
+# Site output directory to index
+site: dist
+
+# Glob patterns for files to include in the search index
+# Only index HTML files in the blog directory
+# glob: "blog/**/*.html"
+
+# Selectors to exclude from indexing (navigation, footers, etc.)
+exclude_selectors:
+  - "header"
+  - "footer"
+  - ".search-section"
+  - ".category-section"
+  - ".no-print"
+
+# Custom data attributes to index as metadata
+clear_empty_data: true
+
+# Keep URL fragments for better linking
+keep_index_url: true
+
+# Filter attributes for faceted search
+# These will be available in the Pagefind UI
+filter:
+  category:
+    - AI
+    - Cybersecurity
+    - Data
+    - Privacy
+    - Emerging Tech
+
+# Default language
+language: en
+
+# Indexing options
+crawl: true
+verbose: false

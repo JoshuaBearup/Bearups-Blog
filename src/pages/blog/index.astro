@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
@@ -316,7 +315,7 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))].slice(
 								<article class="post-card">
 									<a href={`/blog/${post.id}/`}>
 										{post.data.heroImage && (
-											<Image 
+											<img 
 												width={720} 
 												height={360} 
 												src={post.data.heroImage} 
